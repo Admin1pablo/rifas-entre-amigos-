@@ -23,12 +23,21 @@
 <aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><input name="email" type="email" placeholder="Correo electrónico"><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main><script>
 function elegirNumeros() {
     const cantidad = parseInt(document.getElementById("cantidadNumeros").value);
-    const total = {{ raffle.total_numbers }};
+
+    const disponibles = Array.from(
+        document.querySelectorAll('input[name="numbers"]:not(:checked)')
+    ).map(input => parseInt(input.value));
+
+    if (cantidad > disponibles.length) {
+        alert("No hay suficientes números disponibles.");
+        return;
+    }
 
     let numeros = [];
 
     while (numeros.length < cantidad) {
-        let numero = Math.floor(Math.random() * total);
+        const indice = Math.floor(Math.random() * disponibles.length);
+        const numero = disponibles[indice];
 
         if (!numeros.includes(numero)) {
             numeros.push(numero);
@@ -36,6 +45,16 @@ function elegirNumeros() {
     }
 
     numeros.sort((a, b) => a - b);
+
+    numeros.forEach(numero => {
+        const checkbox = document.querySelector(
+            `input[name="numbers"][value="${numero}"]`
+        );
+
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
 
     document.getElementById("numerosElegidos").innerHTML =
         "🎉 Tus números de la suerte son: <strong>" +
