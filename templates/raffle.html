@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es"><head><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{raffle.vehicle}} - Rifas Entre Amigos</title><link rel="stylesheet" href="/static/style.css"></head>
 <body><header><div class="logo">RIFAS ENTRE AMIGOS <small>del Rancho</small></div><a href="/">Inicio</a></header>
 <main><div class="top"><div><p>RIFA ACTIVA</p><h1>{{raffle.vehicle}}</h1><p>{{raffle.description}}</p><strong>${{ "%.2f"|format(raffle.price) }} MXN por número</strong></div></div>
