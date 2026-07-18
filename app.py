@@ -95,22 +95,28 @@ def raffle(raffle_id):
 def reserve():
     raffle_id = int(request.form["raffle_id"])
     numbers = [int(x) for x in request.form.getlist("numbers")]
-   name = request.form["name"].strip()
-phone = request.form["phone"].strip()
-state = request.form["state"].strip() 
+    name = request.form["name"].strip()
+    phone = request.form["phone"].strip()
+    state = request.form["state"].strip()
 
-    if not numbers or not name or not phone:
+    if not numbers or not name or not phone or not state:
         flash("Completa tus datos y selecciona al menos un número.")
         return redirect(url_for("raffle", raffle_id=raffle_id))
 
     conn = get_db()
     placeholders = ",".join(["?"] * len(numbers))
+
     rows = conn.execute(
         f"SELECT number, status FROM tickets WHERE raffle_id=? AND number IN ({placeholders})",
         [raffle_id] + numbers
     ).fetchall()
 
-    unavailable = [str(r["number"]).zfill(4) for r in rows if r["status"] != "available"]
+    unavailable = [
+        str(r["number"]).zfill(4)
+        for r in rows
+        if r["status"] != "available"
+    ]
+
     if unavailable:
         conn.close()
         flash("Algunos números ya no están disponibles: " + ", ".join(unavailable))
@@ -118,13 +124,22 @@ state = request.form["state"].strip()
 
     conn.executemany("""
         UPDATE tickets
-SET status='reserved', participant_name=?, phone=?, reserved_until=datetime('now', '+15 minutes')
-WHERE raffle_id=? AND number=?
-    [(name, phone, raffle_id, n) for n in numbers]
+        SET status='reserved',
+            participant_name=?,
+            phone=?,
+            reserved_until=datetime('now', '+15 minutes')
+        WHERE raffle_id=? AND number=?
+    """, [(name, phone, raffle_id, n) for n in numbers])
+
     conn.commit()
     conn.close()
-    flash(f"¡Listo! Tus {len(numbers)} números quedaron apartados temporalmente. El pago se conectará en la siguiente fase.")
+
+    flash(
+        f"¡Listo! Tus {len(numbers)} números quedaron apartados temporalmente."
+    )
+
     return redirect(url_for("raffle", raffle_id=raffle_id))
+
 
 @app.route("/admin")
 def admin():
