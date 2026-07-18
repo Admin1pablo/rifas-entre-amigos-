@@ -93,7 +93,7 @@ def init_db():
 
     conn.commit()
     conn.close()
-    init_db()
+    
 @app.route("/")
 def index():
     conn = get_db()
@@ -202,7 +202,7 @@ def create_raffle():
     conn.close()
     flash("Rifa creada correctamente.")
     return redirect(url_for("admin"))
-
+init_db()
 if __name__ == "__main__":
-    init_db()
+    
     app.run(debug=True)
