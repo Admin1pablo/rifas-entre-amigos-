@@ -1,6 +1,245 @@
 <!doctype html>
-<html lang="es"><head><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rifas Entre Amigos del Rancho</title><link rel="stylesheet" href="/static/style.css"></head>
-<body><header><div class="logo">RIFAS ENTRE AMIGOS <small>del Rancho</small></div><a href="/admin">Panel admin</a></header>
-<main><section class="hero"><p>SORTEOS ACTIVOS</p><h1>La suerte puede ser tuya</h1><p>Elige tu rifa, selecciona tus números y participa.</p></section>
-<section><h2>Rifas activas</h2><div class="cards">{% for r in raffles %}<article class="card"><span class="tag">ACTIVA</span><h3>{{r.vehicle}}</h3><p>{{r.description}}</p><strong>${{ "%.2f"|format(r.price) }} MXN por número</strong><a class="button" href="/rifa/{{r.id}}">Ver y seleccionar números</a></article>{% endfor %}</div></section></main></body></html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rifas Entre Amigos del Rancho</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-title">
+            RIFAS ENTRE AMIGOS
+        </div>
+
+        <div class="brand-subtitle">
+            DEL RANCHO
+        </div>
+    </div>
+
+    <nav class="navigation">
+        <a href="#rifas">Rifas</a>
+        <a href="#como-participar">¿Cómo participar?</a>
+        <a href="/admin">Admin</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- HERO PRINCIPAL -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                🎟️ RIFAS ENTRE AMIGOS DEL RANCHO
+            </span>
+
+            <h1>
+                LA SUERTE
+                <span>PUEDE SER TUYA</span>
+            </h1>
+
+            <p>
+                Participa en nuestras rifas de vehículos,
+                elige tus números y deja que la suerte haga lo suyo.
+            </p>
+
+            <a href="#rifas" class="hero-button">
+                VER RIFAS ACTIVAS
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIFAS ACTIVAS -->
+
+    <section class="raffles-section" id="rifas">
+
+        <div class="section-heading">
+
+            <span>🔥 OPORTUNIDADES ACTIVAS</span>
+
+            <h2>
+                RIFAS ACTIVAS
+            </h2>
+
+            <p>
+                Elige tu próxima oportunidad.
+            </p>
+
+        </div>
+
+
+        <div class="raffle-grid">
+
+            {% for r in raffles %}
+
+            <article class="raffle-card">
+
+                <div class="raffle-status">
+                    ● RIFA ACTIVA
+                </div>
+
+
+                <div class="raffle-image">
+
+                    <div class="car-placeholder">
+                        🚘
+                    </div>
+
+                </div>
+
+
+                <div class="raffle-content">
+
+                    <h3>
+                        {{ r.vehicle }}
+                    </h3>
+
+
+                    <p class="raffle-description">
+                        {{ r.description }}
+                    </p>
+
+
+                    <div class="price">
+
+                        <span>
+                            PRECIO POR NÚMERO
+                        </span>
+
+                        <strong>
+                            ${{ "%.2f"|format(r.price) }} MXN
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        class="raffle-button"
+                        href="/rifa/{{ r.id }}"
+                    >
+
+                        🎟️ ELEGIR MIS NÚMEROS
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- COMO PARTICIPAR -->
+
+    <section
+        class="how-section"
+        id="como-participar"
+    >
+
+        <div class="section-heading">
+
+            <span>🎯 ES MUY FÁCIL</span>
+
+            <h2>
+                ¿CÓMO PARTICIPAR?
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    ELIGE TU RIFA
+                </h3>
+
+                <p>
+                    Selecciona el vehículo que quieres ganar.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    ELIGE TUS NÚMEROS
+                </h3>
+
+                <p>
+                    Selecciona tus números favoritos o utiliza la Maquinita del Rancho.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    REALIZA TU PAGO
+                </h3>
+
+                <p>
+                    Envía tu comprobante y confirma tu participación.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        RIFAS ENTRE AMIGOS
+        <span>DEL RANCHO</span>
+
+    </div>
+
+    <p>
+        La suerte puede cambiar tu historia.
+    </p>
+
+</footer>
+
+
+</body>
+</html>
