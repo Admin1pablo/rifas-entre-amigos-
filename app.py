@@ -16,20 +16,8 @@ def get_db():
 
 def init_db():
     conn = get_db()
-    conn.executescript("""    try:
-        conn.execute("ALTER TABLE tickets ADD COLUMN state TEXT")
-    except sqlite3.OperationalError:
-        pass
 
-    try:
-        conn.execute("ALTER TABLE tickets ADD COLUMN payment_status TEXT NOT NULL DEFAULT 'pending'")
-    except sqlite3.OperationalError:
-        pass
-
-    try:
-        conn.execute("ALTER TABLE tickets ADD COLUMN payment_proof TEXT")
-    except sqlite3.OperationalError:
-        pass
+    conn.executescript("""
     CREATE TABLE IF NOT EXISTS raffles (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -47,19 +35,36 @@ def init_db():
         raffle_id INTEGER NOT NULL,
         number INTEGER NOT NULL,
         status TEXT NOT NULL DEFAULT 'available',
-participant_name TEXT,
-phone TEXT,
-state TEXT,
-payment_status TEXT NOT NULL DEFAULT 'pending',
-payment_proof TEXT,
+        participant_name TEXT,
+        phone TEXT,
         email TEXT,
+        state TEXT,
+        payment_status TEXT NOT NULL DEFAULT 'pending',
+        payment_proof TEXT,
         reserved_until TEXT,
         created_at TEXT NOT NULL,
         UNIQUE(raffle_id, number),
         FOREIGN KEY(raffle_id) REFERENCES raffles(id)
     );
     """)
+
+    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN state TEXT")
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN payment_status TEXT NOT NULL DEFAULT 'pending'")
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN payment_proof TEXT")
+    except sqlite3.OperationalError:
+        pass
+
     existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
+
     if existing == 0:
         cur = conn.execute("""
             INSERT INTO raffles(name, vehicle, description, price, total_numbers, draw_date, status, created_at)
@@ -73,18 +78,21 @@ payment_proof TEXT,
             "Por anunciar",
             datetime.now().isoformat()
         ))
+
         raffle_id = cur.lastrowid
+
         conn.executemany(
             "INSERT INTO tickets(raffle_id, number, status, created_at) VALUES (?, ?, 'available', ?)",
             [(raffle_id, i, datetime.now().isoformat()) for i in range(10000)]
         )
+
         conn.executemany(
             "UPDATE tickets SET status='sold' WHERE raffle_id=? AND number=?",
-            [(raffle_id, n) for n in [12,45,78,101,2458,9999]]
+            [(raffle_id, n) for n in [12, 45, 78, 101, 2458, 9999]]
         )
+
     conn.commit()
     conn.close()
-init_db()
 @app.route("/")
 def index():
     conn = get_db()
