@@ -20,7 +20,41 @@
     <p id="numerosElegidos"></p>
 </div><div class="legend"><span class="available">Disponible</span><span class="selected">Seleccionado</span><span class="reserved">Apartado</span><span class="sold">Vendido</span></div>
 <div class="numbers">{% for n in range(raffle.total_numbers) %}{% if n in sold %}<span class="num sold">{{"%04d"|format(n)}}</span>{% elif n in reserved %}<span class="num reserved">{{"%04d"|format(n)}}</span>{% else %}<label class="num available"><input type="checkbox" name="numbers" value="{{n}}"> {{ "%04d"|format(n) }}</label>{% endif %}{% endfor %}</div></section>
-<aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><input name="email" type="email" placeholder="Correo electrónico"><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main><script>
+<aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><select name="state" required>
+    <option value="">Selecciona tu estado</option>
+    <option>Aguascalientes</option>
+    <option>Baja California</option>
+    <option>Baja California Sur</option>
+    <option>Campeche</option>
+    <option>Chiapas</option>
+    <option>Chihuahua</option>
+    <option>Ciudad de México</option>
+    <option>Coahuila</option>
+    <option>Colima</option>
+    <option>Durango</option>
+    <option>Estado de México</option>
+    <option>Guanajuato</option>
+    <option>Guerrero</option>
+    <option>Hidalgo</option>
+    <option>Jalisco</option>
+    <option>Michoacán</option>
+    <option>Morelos</option>
+    <option>Nayarit</option>
+    <option>Nuevo León</option>
+    <option>Oaxaca</option>
+    <option>Puebla</option>
+    <option>Querétaro</option>
+    <option>Quintana Roo</option>
+    <option>San Luis Potosí</option>
+    <option>Sinaloa</option>
+    <option>Sonora</option>
+    <option>Tabasco</option>
+    <option>Tamaulipas</option>
+    <option>Tlaxcala</option>
+    <option>Veracruz</option>
+    <option>Yucatán</option>
+    <option>Zacatecas</option>
+</select><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main><script>
 function elegirNumeros() {
     const cantidad = parseInt(document.getElementById("cantidadNumeros").value);
 
