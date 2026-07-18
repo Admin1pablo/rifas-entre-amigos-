@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rifas Entre Amigos del Rancho</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><header><div class="logo">RIFAS ENTRE AMIGOS <small>del Rancho</small></div><a href="/admin">Panel admin</a></header>
+<main><section class="hero"><p>SORTEOS ACTIVOS</p><h1>La suerte puede ser tuya</h1><p>Elige tu rifa, selecciona tus números y participa.</p></section>
+<section><h2>Rifas activas</h2><div class="cards">{% for r in raffles %}<article class="card"><span class="tag">ACTIVA</span><h3>{{r.vehicle}}</h3><p>{{r.description}}</p><strong>${{ "%.2f"|format(r.price) }} MXN por número</strong><a class="button" href="/rifa/{{r.id}}">Ver y seleccionar números</a></article>{% endfor %}</div></section></main></body></html>
