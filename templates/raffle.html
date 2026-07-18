@@ -20,4 +20,26 @@
     <p id="numerosElegidos"></p>
 </div><div class="legend"><span class="available">Disponible</span><span class="selected">Seleccionado</span><span class="reserved">Apartado</span><span class="sold">Vendido</span></div>
 <div class="numbers">{% for n in range(raffle.total_numbers) %}{% if n in sold %}<span class="num sold">{{"%04d"|format(n)}}</span>{% elif n in reserved %}<span class="num reserved">{{"%04d"|format(n)}}</span>{% else %}<label class="num available"><input type="checkbox" name="numbers" value="{{n}}"> {{ "%04d"|format(n) }}</label>{% endif %}{% endfor %}</div></section>
-<aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><input name="email" type="email" placeholder="Correo electrónico"><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main></body></html>
+<aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><input name="email" type="email" placeholder="Correo electrónico"><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main><script>
+function elegirNumeros() {
+    const cantidad = parseInt(document.getElementById("cantidadNumeros").value);
+    const total = {{ raffle.total_numbers }};
+
+    let numeros = [];
+
+    while (numeros.length < cantidad) {
+        let numero = Math.floor(Math.random() * total);
+
+        if (!numeros.includes(numero)) {
+            numeros.push(numero);
+        }
+    }
+
+    numeros.sort((a, b) => a - b);
+
+    document.getElementById("numerosElegidos").innerHTML =
+        "🎉 Tus números de la suerte son: <strong>" +
+        numeros.map(n => String(n).padStart(4, "0")).join(", ") +
+        "</strong>";
+}
+</script></body></html>
