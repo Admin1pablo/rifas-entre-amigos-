@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
 from pathlib import Path
+from werkzeug.utils import secure_filename
 from datetime import datetime
 
 BASE_DIR = Path(__file__).parent
 DB_PATH = BASE_DIR / "rifas.db"
+UPLOAD_FOLDER = BASE_DIR / "uploads"
+UPLOAD_FOLDER.mkdir(exist_ok=True)
 
 app = Flask(__name__)
 app.secret_key = "cambia-esta-clave-en-produccion"
@@ -123,10 +126,19 @@ def reserve():
     name = request.form["name"].strip()
     phone = request.form["phone"].strip()
     state = request.form["state"].strip()
-
+payment_proof = request.files.get("payment_proof")
+if not payment_proof or payment_proof.filename == "":
+    flash("Debes subir tu comprobante de pago.")
+    return redirect(url_for("raffle", raffle_id=raffle_id))
+    
     if not numbers or not name or not phone or not state:
         flash("Completa tus datos y selecciona al menos un número.")
         return redirect(url_for("raffle", raffle_id=raffle_id))
+
+    filename = secure_filename(payment_proof.filename)
+payment_filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{filename}"
+payment_path = UPLOAD_FOLDER / payment_filename
+payment_proof.save(payment_path)
 
     conn = get_db()
     placeholders = ",".join(["?"] * len(numbers))
@@ -148,13 +160,18 @@ def reserve():
         return redirect(url_for("raffle", raffle_id=raffle_id))
 
     conn.executemany("""
-        UPDATE tickets
-        SET status='reserved',
-            participant_name=?,
-            phone=?,
-            reserved_until=datetime('now', '+15 minutes')
-        WHERE raffle_id=? AND number=?
-    """, [(name, phone, raffle_id, n) for n in numbers])
+    UPDATE tickets
+    SET status='reserved',
+        participant_name=?,
+        phone=?,
+        state=?,
+        payment_proof=?,
+        reserved_until=datetime('now', '+15 minutes')
+    WHERE raffle_id=? AND number=?
+""", [
+    (name, phone, state, payment_filename, raffle_id, n)
+    for n in numbers
+])
 
     conn.commit()
     conn.close()
