@@ -5,7 +5,9 @@
 <main><div class="top"><div><p>RIFA ACTIVA</p><h1>{{raffle.vehicle}}</h1><p>{{raffle.description}}</p><strong>${{ "%.2f"|format(raffle.price) }} MXN por número</strong></div></div>
 {% with messages = get_flashed_messages() %}{% if messages %}<div class="notice">{% for message in messages %}{{message}}{% endfor %}</div>{% endif %}{% endwith %}
 <form method="post" action="/api/reservar"><input type="hidden" name="raffle_id" value="{{raffle.id}}">
-<div class="layout"><section class="panel"><h2><div class="lucky-machine">
+<div class="layout"><section class="panel"><h2>Selecciona tus números</h2>
+
+<div class="lucky-machine">
     <h3>🎰 Maquinita de la suerte</h3>
     <p>¿Cuántos números quieres que te elija?</p>
 
@@ -16,6 +18,6 @@
     </button>
 
     <p id="numerosElegidos"></p>
-</div>Selecciona tus números</h2><div class="legend"><span class="available">Disponible</span><span class="selected">Seleccionado</span><span class="reserved">Apartado</span><span class="sold">Vendido</span></div>
+</div><div class="legend"><span class="available">Disponible</span><span class="selected">Seleccionado</span><span class="reserved">Apartado</span><span class="sold">Vendido</span></div>
 <div class="numbers">{% for n in range(raffle.total_numbers) %}{% if n in sold %}<span class="num sold">{{"%04d"|format(n)}}</span>{% elif n in reserved %}<span class="num reserved">{{"%04d"|format(n)}}</span>{% else %}<label class="num available"><input type="checkbox" name="numbers" value="{{n}}"> {{ "%04d"|format(n) }}</label>{% endif %}{% endfor %}</div></section>
 <aside class="panel"><h2>Tus datos</h2><input name="name" placeholder="Nombre completo" required><input name="phone" placeholder="Teléfono" required><input name="email" type="email" placeholder="Correo electrónico"><p class="small">Los números se apartarán temporalmente para completar el proceso de compra.</p><button class="button" type="submit">Apartar números</button></aside></div></form></main></body></html>
