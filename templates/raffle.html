@@ -80,9 +80,11 @@
 
 
     <form
-        method="post"
-        action="/api/reservar"
-        id="raffleForm"
+    method="post"
+    action="/api/reservar"
+    id="raffleForm"
+    enctype="multipart/form-data"
+>
     >
 
         <input
@@ -336,7 +338,16 @@
                     <option>Zacatecas</option>
 
                 </select>
+                <label>
+                    Comprobante de pago
+                </label>
 
+                <input
+                    type="file"
+                    name="payment_proof"
+                    accept="image/*"
+                    required
+                >
 
                 <div class="purchase-summary">
 
