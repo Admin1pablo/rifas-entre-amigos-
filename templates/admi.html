@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Administración - Rifas Entre Amigos</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><header><div class="logo">RIFAS ENTRE AMIGOS <small>Administración</small></div><a href="/">Ver sitio</a></header>
+<main>{% with messages = get_flashed_messages() %}{% if messages %}<div class="notice">{% for message in messages %}{{message}}{% endfor %}</div>{% endif %}{% endwith %}
+<div class="layout"><section><h1>Panel de administración</h1>{% for r in raffles %}<div class="panel"><h2>{{r.vehicle}}</h2><p>{{r.name}}</p><p>Vendidos: {{r.sold_count or 0}} · Apartados: {{r.reserved_count or 0}} · Total: {{r.total_numbers}}</p><a class="button" href="/rifa/{{r.id}}">Ver rifa</a></div>{% endfor %}</section>
+<aside class="panel"><h2>Crear nueva rifa</h2><form method="post" action="/admin/crear-rifa"><input name="name" placeholder="Nombre de la rifa" required><input name="vehicle" placeholder="Vehículo" required><textarea name="description" placeholder="Descripción"></textarea><input name="price" type="number" step="0.01" placeholder="Precio por número" required><input name="total_numbers" type="number" placeholder="Cantidad de números" required><input name="draw_date" placeholder="Fecha del sorteo"><button class="button">Crear rifa</button></form></aside></div></main></body></html>
