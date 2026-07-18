@@ -16,7 +16,20 @@ def get_db():
 
 def init_db():
     conn = get_db()
-    conn.executescript("""
+    conn.executescript("""    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN state TEXT")
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN payment_status TEXT NOT NULL DEFAULT 'pending'")
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        conn.execute("ALTER TABLE tickets ADD COLUMN payment_proof TEXT")
+    except sqlite3.OperationalError:
+        pass
     CREATE TABLE IF NOT EXISTS raffles (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -34,8 +47,11 @@ def init_db():
         raffle_id INTEGER NOT NULL,
         number INTEGER NOT NULL,
         status TEXT NOT NULL DEFAULT 'available',
-        participant_name TEXT,
-        phone TEXT,
+participant_name TEXT,
+phone TEXT,
+state TEXT,
+payment_status TEXT NOT NULL DEFAULT 'pending',
+payment_proof TEXT,
         email TEXT,
         reserved_until TEXT,
         created_at TEXT NOT NULL,
