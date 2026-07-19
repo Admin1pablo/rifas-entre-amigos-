@@ -161,7 +161,17 @@
                         >
                             👁️ Ver comprobante
                         </a>
+<form method="post" action="/admin/aprobar/{{ ticket.id }}">
+    <button class="button" type="submit">
+        ✅ Aprobar pago
+    </button>
+</form>
 
+<form method="post" action="/admin/rechazar/{{ ticket.id }}">
+    <button class="button" type="submit">
+        ❌ Rechazar pago
+    </button>
+</form>
                     {% else %}
 
                         <p>
