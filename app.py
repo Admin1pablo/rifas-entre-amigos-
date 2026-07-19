@@ -213,6 +213,45 @@ def admin():
         raffles=raffles,
         tickets=tickets
     )
+@app.post("/admin/aprobar/<int:ticket_id>")
+def approve_ticket(ticket_id):
+    conn = get_db()
+
+    conn.execute("""
+        UPDATE tickets
+        SET status='sold',
+            payment_status='approved'
+        WHERE id=?
+    """, (ticket_id,))
+
+    conn.commit()
+    conn.close()
+
+    flash("Pago aprobado correctamente. El número ahora aparece como vendido.")
+    return redirect(url_for("admin"))
+
+
+@app.post("/admin/rechazar/<int:ticket_id>")
+def reject_ticket(ticket_id):
+    conn = get_db()
+
+    conn.execute("""
+        UPDATE tickets
+        SET status='available',
+            payment_status='rejected',
+            participant_name=NULL,
+            phone=NULL,
+            state=NULL,
+            payment_proof=NULL,
+            reserved_until=NULL
+        WHERE id=?
+    """, (ticket_id,))
+
+    conn.commit()
+    conn.close()
+
+    flash("Pago rechazado. El número volvió a estar disponible.")
+    return redirect(url_for("admin"))    
 @app.post("/admin/crear-rifa")
 def create_raffle():
     name = request.form["name"]
