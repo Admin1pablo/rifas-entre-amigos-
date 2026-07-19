@@ -182,7 +182,6 @@ payment_proof.save(payment_path)
 
     return redirect(url_for("raffle", raffle_id=raffle_id))
 
-
 @app.route("/admin")
 def admin():
     conn = get_db()
