@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, session
 import sqlite3
 from pathlib import Path
 from werkzeug.utils import secure_filename
@@ -10,7 +10,7 @@ UPLOAD_FOLDER = BASE_DIR / "uploads"
 UPLOAD_FOLDER.mkdir(exist_ok=True)
 
 app = Flask(__name__)
-app.secret_key = "cambia-esta-clave-en-produccion"
+app.secret_key = "una-clave-secreta-muy-larga-rifas-rancho-2026"
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -182,8 +182,27 @@ def reserve():
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
-@app.route("/admin")
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
+
+    if not session.get("admin_logged_in"):
+
+        if request.method == "POST":
+
+            username = request.form.get("username", "").strip()
+            password = request.form.get("password", "").strip()
+
+            if username == "admin" and password == "RANCHO2026":
+
+                session["admin_logged_in"] = True
+
+                return redirect(url_for("admin"))
+
+            flash("Usuario o contraseña incorrectos.")
+
+        return render_template("admin_login.html")
+
+
     conn = get_db()
 
     raffles = conn.execute("""
@@ -196,6 +215,7 @@ def admin():
         ORDER BY r.id DESC
     """).fetchall()
 
+
     tickets = conn.execute("""
         SELECT
             t.*,
@@ -206,7 +226,9 @@ def admin():
         ORDER BY t.id DESC
     """).fetchall()
 
+
     conn.close()
+
 
     return render_template(
         "admin.html",
