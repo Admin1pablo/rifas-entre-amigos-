@@ -235,6 +235,12 @@ def admin():
         raffles=raffles,
         tickets=tickets
     )
+@app.route("/admin/logout")
+def admin_logout():
+
+    session.clear()
+
+    return redirect(url_for("admin"))    
 @app.post("/admin/aprobar/<int:ticket_id>")
 def approve_ticket(ticket_id):
     conn = get_db()
