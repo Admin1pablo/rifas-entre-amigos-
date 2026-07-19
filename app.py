@@ -135,10 +135,10 @@ if not payment_proof or payment_proof.filename == "":
         flash("Completa tus datos y selecciona al menos un número.")
         return redirect(url_for("raffle", raffle_id=raffle_id))
 
-    filename = secure_filename(payment_proof.filename)
-payment_filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{filename}"
-payment_path = UPLOAD_FOLDER / payment_filename
-payment_proof.save(payment_path)
+      filename = secure_filename(payment_proof.filename)
+    payment_filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{filename}"
+    payment_path = UPLOAD_FOLDER / payment_filename
+    payment_proof.save(payment_path)  
 
     conn = get_db()
     placeholders = ",".join(["?"] * len(numbers))
