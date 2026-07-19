@@ -746,3 +746,18 @@ footer p {
 }
     }
 }
+/* Orden vertical de la rifa */
+
+.raffle-layout-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.raffle-layout-vertical .numbers-panel {
+    width: 100%;
+}
+
+.raffle-layout-vertical .participant-panel {
+    width: 100%;
+}
