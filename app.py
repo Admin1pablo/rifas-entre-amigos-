@@ -195,7 +195,6 @@ def admin():
     """).fetchall()
     conn.close()
     return render_template("admin.html", raffles=raffles)
-
 @app.post("/admin/crear-rifa")
 def create_raffle():
     name = request.form["name"]
