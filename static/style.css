@@ -2,762 +2,223 @@
     box-sizing: border-box;
 }
 
-:root {
-    --black: #0b0b0a;
-    --dark: #141411;
-    --card: #1c1b17;
-    --gold: #d6a542;
-    --gold-light: #f0c766;
-    --cream: #f4ead7;
-    --muted: #aaa08e;
-    --green: #2f7547;
-    --green-light: #8fd09a;
-    --border: #4a3a20;
-}
-
 body {
     margin: 0;
-    background: var(--black);
-    color: var(--cream);
+    background: #111;
+    color: #f4efe5;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* HEADER */
-
-.topbar {
-    min-height: 90px;
-    padding: 18px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    background: #0e0e0d;
-}
-
-.brand-title {
-    color: var(--gold);
-    font-size: clamp(20px, 4vw, 34px);
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-
-.brand-subtitle {
-    color: var(--cream);
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 3px;
-}
-
-.navigation {
-    display: flex;
-    gap: 22px;
-    align-items: center;
-}
-
-.navigation a {
-    color: var(--gold);
+a {
+    color: inherit;
     text-decoration: none;
-    font-weight: bold;
 }
 
-.navigation a:hover {
-    color: var(--gold-light);
-}
+.home-header {
+    min-height: 170px;
+    background: #1b1b1b;
+    border-top: 30px solid #4c9b35;
+    border-bottom: 30px solid #4c9b35;
 
-/* HERO */
-
-.hero {
-    min-height: 480px;
-    padding: 90px 6%;
-    display: flex;
-    align-items: center;
-    background:
-        linear-gradient(
-            rgba(11, 11, 10, .82),
-            rgba(11, 11, 10, .96)
-        );
-    border-bottom: 1px solid var(--border);
-}
-
-.hero-content {
-    max-width: 780px;
-}
-
-.hero-label {
-    color: var(--gold-light);
-    font-weight: bold;
-    letter-spacing: 1px;
-    font-size: 14px;
-}
-
-.hero h1 {
-    margin: 18px 0;
-    font-size: clamp(45px, 8vw, 90px);
-    line-height: .98;
-    color: var(--cream);
-}
-
-.hero h1 span {
-    display: block;
-    color: var(--gold);
-}
-
-.hero p {
-    max-width: 650px;
-    color: var(--muted);
-    font-size: 20px;
-    line-height: 1.5;
-}
-
-.hero-button,
-.raffle-button {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 15px 24px;
-    border-radius: 10px;
-    background: var(--gold);
-    color: #15120c;
-    text-decoration: none;
-    font-weight: 900;
-    transition: .2s;
-}
-
-.hero-button:hover,
-.raffle-button:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-}
-
-/* SECCIONES */
-
-main {
-    max-width: 1250px;
-    margin: auto;
-}
-
-.raffles-section,
-.how-section {
-    padding: 75px 6%;
-}
-
-.section-heading span {
-    color: var(--gold-light);
-    font-weight: bold;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-
-.section-heading h2 {
-    margin: 10px 0;
-    color: var(--cream);
-    font-size: clamp(32px, 6vw, 55px);
-}
-
-.section-heading p {
-    color: var(--muted);
-}
-
-/* TARJETAS DE RIFA */
-
-.raffle-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 35px;
+    grid-template-columns: 1fr 220px 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
 }
 
-.raffle-card {
-    overflow: hidden;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    transition: .25s;
+.payment-link {
+    font-size: 30px;
+    font-weight: 900;
 }
 
-.raffle-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
+.home-logo {
+    background: #176b2c;
+    border: 6px solid #d6a82e;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    margin: -70px auto -70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #f4d36a;
+    text-align: center;
 }
 
-.raffle-status {
-    padding: 15px 20px;
-    color: var(--green-light);
+.home-logo strong {
+    font-size: 16px;
+}
+
+.home-logo small {
     font-size: 13px;
-    font-weight: bold;
+    margin-top: 8px;
 }
 
-.raffle-image {
-    min-height: 190px;
+.home-page {
+    text-align: center;
+}
+
+.main-raffle h1 {
+    font-size: clamp(42px, 8vw, 90px);
+    margin: 90px 15px 20px;
+    font-weight: 900;
+}
+
+.main-raffle h2 {
+    font-size: clamp(30px, 5vw, 55px);
+    margin: 20px;
+}
+
+.tickets-title {
+    background: white;
+    color: #111;
+    padding: 25px 10px;
+    margin-top: 40px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #10100e;
-}
+    gap: 35px;
 
-.car-placeholder {
-    font-size: 80px;
-}
-
-.raffle-content {
-    padding: 24px;
-}
-
-.raffle-content h3 {
-    margin: 0;
-    color: var(--gold);
-    font-size: 30px;
-}
-
-.raffle-description {
-    color: var(--muted);
-    line-height: 1.5;
-}
-
-.price {
-    margin-top: 25px;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
-}
-
-.price span {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.price strong {
-    display: block;
-    margin-top: 5px;
-    color: var(--cream);
-    font-size: 25px;
-}
-
-/* PASOS */
-
-.steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 35px;
-}
-
-.step {
-    padding: 25px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 15px;
-}
-
-.step-number {
-    color: var(--gold);
-    font-size: 35px;
+    font-size: clamp(24px, 5vw, 55px);
     font-weight: 900;
 }
 
-.step h3 {
-    color: var(--cream);
+.tickets-title span {
+    color: #4c9b35;
+    font-size: 45px;
 }
 
-.step p {
-    color: var(--muted);
+.vehicle-card {
+    max-width: 950px;
+    min-height: 450px;
+    margin: 35px auto;
+    padding: 14px;
+
+    border: 14px solid #4c9b35;
+    border-radius: 40px;
+    background: #222;
+}
+
+.vehicle-placeholder {
+    min-height: 420px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 130px;
+}
+
+.vehicle-placeholder p {
+    font-size: 30px;
+    margin: 10px;
+}
+
+.promotion {
+    background: #1b1b1b;
+    padding: 45px 20px;
+}
+
+.promotion h2 {
+    font-size: clamp(32px, 6vw, 60px);
+    margin: 0 0 20px;
+}
+
+.promotion h3 {
+    font-size: clamp(25px, 5vw, 50px);
+}
+
+.main-button {
+    display: inline-block;
+    background: #4c9b35;
+    color: white;
+
+    padding: 20px 35px;
+    margin-top: 20px;
+
+    border-radius: 12px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main-button:hover {
+    background: #66bd49;
+}
+
+.info-section {
+    padding: 70px 20px;
+    border-top: 1px solid #444;
+}
+
+.info-section h2 {
+    font-size: clamp(30px, 6vw, 55px);
+}
+
+.info-section p {
+    font-size: 24px;
+    max-width: 900px;
+    margin: auto;
     line-height: 1.5;
 }
 
-/* FOOTER */
+.no-raffles {
+    padding: 100px 20px;
+}
 
 footer {
-    padding: 40px 6%;
+    border-top: 1px solid #444;
     text-align: center;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
+    padding: 80px 20px;
+    font-size: 22px;
+    color: #aaa;
 }
 
-.footer-brand {
-    color: var(--gold);
-    font-weight: 900;
-    font-size: 20px;
-}
 
-.footer-brand span {
-    color: var(--cream);
-}
-
-footer p {
-    font-size: 14px;
-}
-
-/* RESPONSIVE */
+/* CELULAR */
 
 @media (max-width: 700px) {
 
-    .topbar {
-        padding: 18px 5%;
-    }
-
-    .navigation {
+    .home-header {
+        grid-template-columns: 1fr 1fr;
         gap: 10px;
+        padding: 10px;
     }
 
-    .navigation a {
-        font-size: 13px;
+    .home-logo {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        width: 145px;
+        height: 145px;
+        margin: -50px auto -40px;
     }
 
-    .navigation a:nth-child(2) {
-        display: none;
-    }
-
-    .hero {
-        min-height: 430px;
-        padding: 70px 6%;
-    }
-
-    .hero p {
-        font-size: 17px;
-    }
-
-    .raffles-section,
-    .how-section {
-        padding: 55px 5%;
-    }
-
-    .steps {
-        grid-template-columns: 1fr;/* =====================================
-   PÁGINA DE SELECCIÓN DE NÚMEROS
-   RIFAS ENTRE AMIGOS DEL RANCHO
-===================================== */
-
-.raffle-page {
-    padding: 0 6% 70px;
-}
-
-/* HERO DE LA RIFA */
-
-.raffle-hero {
-    padding: 55px 0 35px;
-    border-bottom: 1px solid var(--border);
-}
-
-.raffle-hero h1 {
-    margin: 12px 0;
-    color: var(--gold);
-    font-size: clamp(38px, 7vw, 70px);
-}
-
-.raffle-hero p {
-    max-width: 700px;
-    color: var(--muted);
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-.raffle-price {
-    margin-top: 22px;
-    color: var(--cream);
-    font-size: 32px;
-    font-weight: 900;
-}
-
-.raffle-price span {
-    display: block;
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 1px;
-}
-
-
-/* DISTRIBUCIÓN PRINCIPAL */
-
-.raffle-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
-    gap: 25px;
-    margin-top: 30px;
-}
-
-
-/* PANELES */
-
-.numbers-panel,
-.participant-panel {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 25px;
-}
-
-.participant-panel {
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-}
-
-
-/* TÍTULO DE NÚMEROS */
-
-.panel-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.panel-title span,
-.participant-header span {
-    color: var(--gold-light);
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.panel-title h2,
-.participant-header h2 {
-    margin: 8px 0 0;
-    color: var(--cream);
-    font-size: 28px;
-}
-
-.selected-counter {
-    min-width: 75px;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid var(--gold);
-    border-radius: 10px;
-}
-
-.selected-counter strong {
-    display: block;
-    color: var(--gold);
-    font-size: 25px;
-}
-
-.selected-counter small {
-    color: var(--muted);
-    font-size: 10px;
-}
-
-
-/* MAQUINITA DEL RANCHO */
-
-.lucky-machine {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 18px;
-    padding: 20px;
-    background: #11110f;
-    border: 1px solid var(--gold);
-    border-radius: 15px;
-}
-
-.machine-icon {
-    font-size: 48px;
-}
-
-.machine-content {
-    flex: 1;
-}
-
-.machine-content h3 {
-    margin: 0;
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.machine-content p {
-    margin: 7px 0 13px;
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.machine-controls {
-    display: flex;
-    gap: 10px;
-}
-
-.machine-controls input {
-    width: 90px;
-    padding: 11px;
-    color: var(--cream);
-    background: #0b0b0a;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-}
-
-.machine-controls button {
-    padding: 11px 15px;
-    color: #15120c;
-    background: var(--gold);
-    border: 0;
-    border-radius: 8px;
-    font-weight: 900;
-    cursor: pointer;
-}
-
-.machine-controls button:hover {
-    background: var(--gold-light);
-}
-
-
-/* RESULTADO DE LA MAQUINITA */
-
-.lucky-result {
-    padding: 14px;
-    color: var(--cream);
-    background: #282219;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    line-height: 1.6;
-}
-
-.lucky-result strong {
-    color: var(--gold-light);
-}
-
-
-/* LEYENDA */
-
-.legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 20px 0;
-}
-
-.legend span {
-    padding: 8px 10px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.legend .available {
-    color: #c9f0d0;
-    background: #245c36;
-}
-
-.legend .selected {
-    color: #16120b;
-    background: var(--gold);
-}
-
-.legend .reserved {
-    color: #ead09b;
-    background: #725724;
-}
-
-.legend .sold {
-    color: #d9a5a5;
-    background: #542c2c;
-}
-
-
-/* NÚMEROS */
-
-.numbers {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 7px;
-    max-height: 650px;
-    padding-right: 5px;
-    overflow-y: auto;
-}
-
-.num {
-    min-height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 3px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: bold;
-    transition: .15s;
-}
-
-.num input {
-    display: none;
-}
-
-.num.available {
-    color: #d7f0dc;
-    background: #245c36;
-    cursor: pointer;
-}
-
-.num.available:hover {
-    transform: scale(1.05);
-    background: #367b4c;
-}
-
-.num.available:has(input:checked) {
-    color: #16120b;
-    background: var(--gold);
-    box-shadow: 0 0 0 2px var(--gold-light);
-}
-
-.num.reserved {
-    color: #d7bd7b;
-    background: #725724;
-}
-
-.num.sold {
-    color: #b99b9b;
-    background: #542c2c;
-}
-
-
-/* PANEL DE PARTICIPANTE */
-
-.participant-header {
-    margin-bottom: 25px;
-}
-
-.participant-header p {
-    color: var(--muted);
-    line-height: 1.5;
-}
-
-.participant-panel label {
-    display: block;
-    margin-top: 15px;
-    color: var(--cream);
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.participant-panel input,
-.participant-panel select {
-    width: 100%;
-    margin-top: 7px;
-    padding: 13px;
-    color: var(--cream);
-    background: #0d0d0c;
-    border: 1px solid #4a4235;
-    border-radius: 8px;
-    outline: none;
-}
-
-.participant-panel input:focus,
-.participant-panel select:focus {
-    border-color: var(--gold);
-}
-
-
-/* RESUMEN */
-
-.purchase-summary {
-    margin-top: 22px;
-    padding: 16px;
-    background: #11110f;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.purchase-summary span {
-    display: block;
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.purchase-summary strong {
-    display: block;
-    margin-top: 3px;
-    color: var(--gold);
-    font-size: 22px;
-}
-
-.purchase-summary strong:first-of-type {
-    color: var(--cream);
-}
-
-
-/* BOTÓN */
-
-.reserve-button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 16px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-
-    .raffle-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .participant-panel {
-        position: static;
-    }
-
-}
-
-
-@media (max-width: 650px) {
-
-    .raffle-page {
-        padding: 0 4% 50px;
-    }
-
-    .numbers-panel,
-    .participant-panel {
-        padding: 17px;
-        border-radius: 14px;
-    }
-
-    .panel-title h2,
-    .participant-header h2 {
+    .payment-link {
         font-size: 22px;
     }
 
-    .lucky-machine {
-        align-items: flex-start;
-        flex-direction: column;
+    .main-raffle h1 {
+        margin-top: 70px;
+    }
+
+    .tickets-title {
         gap: 10px;
     }
 
-    .machine-controls {
-        flex-direction: column;
+    .vehicle-card {
+        margin: 20px 12px;
+        border-width: 8px;
+        border-radius: 25px;
     }
 
-    .machine-controls input,
-    .machine-controls button {
-        width: 100%;
+    .vehicle-placeholder {
+        min-height: 260px;
+        font-size: 90px;
     }
 
-    .numbers {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        max-height: 550px;
-    }
-
-    .num {
-        min-height: 40px;
-        font-size: 11px;
-    }
-
-}
-    }
-}
-/* Orden vertical de la rifa */
-
-.raffle-layout-vertical {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.raffle-layout-vertical .numbers-panel {
-    width: 100%;
-}
-
-.raffle-layout-vertical .participant-panel {
-    width: 100%;
 }
