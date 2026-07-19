@@ -107,6 +107,21 @@ def index():
 @app.route("/rifa/<int:raffle_id>")
 def raffle(raffle_id):
     conn = get_db()
+    conn.execute("""
+    UPDATE tickets
+    SET status='available',
+        participant_name=NULL,
+        phone=NULL,
+        state=NULL,
+        payment_proof=NULL,
+        payment_status='pending',
+        reserved_until=NULL
+    WHERE status='reserved'
+    AND reserved_until IS NOT NULL
+    AND reserved_until < datetime('now')
+""")
+
+conn.commit()
     r = conn.execute("SELECT * FROM raffles WHERE id=?", (raffle_id,)).fetchone()
     sold = {row["number"] for row in conn.execute(
         "SELECT number FROM tickets WHERE raffle_id=? AND status='sold'", (raffle_id,)
@@ -167,7 +182,7 @@ def reserve():
             phone=?,
             state=?,
             payment_proof=?,
-            reserved_until=datetime('now', '+15 minutes')
+            reserved_until=datetime('now', '+6 hours')
         WHERE raffle_id=? AND number=?
     """, [
         (name, phone, state, payment_filename, raffle_id, n)
