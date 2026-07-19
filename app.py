@@ -183,15 +183,34 @@ def reserve():
 @app.route("/admin")
 def admin():
     conn = get_db()
+
     raffles = conn.execute("""
         SELECT r.*,
         SUM(CASE WHEN t.status='sold' THEN 1 ELSE 0 END) sold_count,
         SUM(CASE WHEN t.status='reserved' THEN 1 ELSE 0 END) reserved_count
-        FROM raffles r LEFT JOIN tickets t ON t.raffle_id=r.id
-        GROUP BY r.id ORDER BY r.id DESC
+        FROM raffles r
+        LEFT JOIN tickets t ON t.raffle_id=r.id
+        GROUP BY r.id
+        ORDER BY r.id DESC
     """).fetchall()
+
+    tickets = conn.execute("""
+        SELECT
+            t.*,
+            r.vehicle
+        FROM tickets t
+        JOIN raffles r ON r.id = t.raffle_id
+        WHERE t.status = 'reserved'
+        ORDER BY t.id DESC
+    """).fetchall()
+
     conn.close()
-    return render_template("admin.html", raffles=raffles)
+
+    return render_template(
+        "admin.html",
+        raffles=raffles,
+        tickets=tickets
+    )
 @app.post("/admin/crear-rifa")
 def create_raffle():
     name = request.form["name"]
