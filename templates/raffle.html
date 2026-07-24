@@ -37,7 +37,17 @@
     <!-- INFORMACIÓN DE LA RIFA -->
 
     <section class="raffle-hero">
+{% if raffle.image %}
 
+<div class="vehicle-image">
+
+    <img
+        src="/uploads/{{ raffle.image }}"
+        alt="{{ raffle.vehicle }}">
+
+</div>
+
+{% endif %}
         <span class="hero-label">
             🎟️ RIFA ACTIVA
         </span>
