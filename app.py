@@ -324,51 +324,62 @@ def reject_ticket(ticket_id):
     return redirect(url_for("admin"))    
 @app.post("/admin/crear-rifa")
 def create_raffle():
-    name = request.form["name"]
-    vehicle = request.form["vehicle"]
-    image = request.files.get("image")
 
-image_name = None
-
-if image and image.filename != "":
-    filename = secure_filename(image.filename)
-    image_name = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{filename}"
-    image.save(UPLOAD_FOLDER / image_name)
-    description = request.form.get("description", "")
+    name = request.form["name"].strip()
+    vehicle = request.form["vehicle"].strip()
+    description = request.form.get("description", "").strip()
     price = float(request.form["price"])
     total_numbers = int(request.form["total_numbers"])
-    draw_date = request.form.get("draw_date", "Por anunciar")
-    
-draw_date = request.form.get("draw_date", "").strip()
+    draw_date = request.form.get("draw_date", "").strip()
 
-conn = get_db()
+    image = request.files.get("image")
+    image_name = None
 
-cur = conn.execute("""
-    INSERT INTO raffles(
+    if image and image.filename != "":
+        filename = secure_filename(image.filename)
+        image_name = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{secure_filename(image.filename)}"
+        image.save(UPLOAD_FOLDER / image_name)
+
+    conn = get_db()
+
+    cur = conn.execute("""
+        INSERT INTO raffles(
+            name,
+            vehicle,
+            description,
+            price,
+            total_numbers,
+            draw_date,
+            image,
+            status,
+            created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'active', ?)
+    """, (
         name,
         vehicle,
         description,
         price,
         total_numbers,
         draw_date,
-        image,
-        status,
-        created_at
+        image_name,
+        datetime.now().isoformat()
+    ))
+
+    raffle_id = cur.lastrowid
+
+    conn.executemany(
+        "INSERT INTO tickets(raffle_id, number, status, created_at) VALUES (?, ?, 'available', ?)",
+        [
+            (raffle_id, i, datetime.now().isoformat())
+            for i in range(total_numbers)
+        ]
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, 'active', ?)
-""", (
-    name,
-    vehicle,
-    description,
-    price,
-    total_numbers,
-    draw_date,
-    image_name,
-    datetime.now().isoformat()
-))
+
     conn.commit()
     conn.close()
-    flash("Rifa creada correctamente.")
+
+    flash("✅ Rifa creada correctamente.")
     return redirect(url_for("admin"))
 init_db()
 if __name__ == "__main__":
