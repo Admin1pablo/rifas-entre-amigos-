@@ -233,3 +233,35 @@ footer {
 </div>
 
 {% endif %}
+.vehicle-info-card{
+    background:#111;
+    color:#fff;
+    border-radius:20px;
+    padding:25px;
+    margin:25px 0;
+}
+
+.vehicle-stats{
+    display:flex;
+    gap:20px;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.stat{
+    flex:1;
+    min-width:120px;
+    text-align:center;
+}
+
+.stat span{
+    display:block;
+    color:#bbb;
+    font-size:14px;
+}
+
+.stat strong{
+    display:block;
+    margin-top:8px;
+    font-size:22px;
+}
