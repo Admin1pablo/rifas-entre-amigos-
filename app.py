@@ -66,10 +66,11 @@ def init_db():
         conn.execute("ALTER TABLE tickets ADD COLUMN payment_proof TEXT")
     except sqlite3.OperationalError:
         pass
+        
     try:
         conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
-except sqlite3.OperationalError:
-    pass
+    except sqlite3.OperationalError:
+        pass
     existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
     if existing == 0:
         cur = conn.execute("""
