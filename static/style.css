@@ -222,3 +222,14 @@ footer {
     }
 
 }
+{% if raffle.image %}
+
+<div class="vehicle-image">
+
+    <img
+        src="/uploads/{{ raffle.image }}"
+        alt="{{ raffle.vehicle }}">
+
+</div>
+
+{% endif %}
