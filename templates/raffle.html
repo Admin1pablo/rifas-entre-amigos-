@@ -37,6 +37,28 @@
     <!-- INFORMACIÓN DE LA RIFA -->
 
     <section class="raffle-hero">
+ <div class="vehicle-info-card">
+
+    <div class="vehicle-stats">
+
+        <div class="stat">
+            <span>💰 Precio</span>
+            <strong>${{ "%.2f"|format(raffle.price) }}</strong>
+        </div>
+
+        <div class="stat">
+            <span>📅 Sorteo</span>
+            <strong>{{ raffle.draw_date }}</strong>
+        </div>
+
+        <div class="stat">
+            <span>🎟 Boletos</span>
+            <strong>{{ raffle.total_numbers }}</strong>
+        </div>
+
+    </div>
+
+</div>       
 <p><strong>Imagen:</strong> {{ raffle.image }}</p>        
 {% if raffle.image %}
 
