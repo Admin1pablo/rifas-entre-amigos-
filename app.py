@@ -45,6 +45,7 @@ def init_db():
         payment_status TEXT NOT NULL DEFAULT 'pending',
         payment_proof TEXT,
         reserved_until TEXT,
+        image TEXT,
         created_at TEXT NOT NULL,
         UNIQUE(raffle_id, number),
         FOREIGN KEY(raffle_id) REFERENCES raffles(id)
@@ -67,7 +68,10 @@ def init_db():
         pass
 
     existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
-
+try:
+    conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
+except sqlite3.OperationalError:
+    pass
     if existing == 0:
         cur = conn.execute("""
             INSERT INTO raffles(name, vehicle, description, price, total_numbers, draw_date, status, created_at)
