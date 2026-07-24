@@ -29,6 +29,7 @@ def init_db():
         price REAL NOT NULL,
         total_numbers INTEGER NOT NULL,
         draw_date TEXT,
+        image TEXT,
         status TEXT NOT NULL DEFAULT 'active',
         created_at TEXT NOT NULL
     );
@@ -45,7 +46,6 @@ def init_db():
         payment_status TEXT NOT NULL DEFAULT 'pending',
         payment_proof TEXT,
         reserved_until TEXT,
-        image TEXT,
         created_at TEXT NOT NULL,
         UNIQUE(raffle_id, number),
         FOREIGN KEY(raffle_id) REFERENCES raffles(id)
