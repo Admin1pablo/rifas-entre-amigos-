@@ -68,7 +68,7 @@ def init_db():
         pass
     try:
     conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
-except sqlite3.OperationalError:
+    except sqlite3.OperationalError:
         pass
     existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
     if existing == 0:
