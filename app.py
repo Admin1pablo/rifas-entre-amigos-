@@ -339,7 +339,6 @@ if image and image.filename != "":
     total_numbers = int(request.form["total_numbers"])
     draw_date = request.form.get("draw_date", "Por anunciar")
 
-
 cur = conn.execute("""
 INSERT INTO raffles(
     name,
