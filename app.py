@@ -66,7 +66,6 @@ def init_db():
         conn.execute("ALTER TABLE tickets ADD COLUMN payment_proof TEXT")
     except sqlite3.OperationalError:
         pass
-
     try:
     conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
 except sqlite3.OperationalError:
