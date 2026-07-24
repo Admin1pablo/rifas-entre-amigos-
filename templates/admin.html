@@ -207,9 +207,9 @@
             ➕ Crear nueva rifa
         </h2>
 
-        <form
-            method="post"
-            action="/admin/crear-rifa"
+        <form method="post"
+      action="/admin/crear-rifa"
+      enctype="multipart/form-data">
         >
 
             <input
@@ -222,6 +222,13 @@
                 name="vehicle"
                 placeholder="Vehículo"
                 required
+             <label>Foto del vehículo</label>
+
+             <input
+                 type="file"
+                 name="image"
+                 accept="image/*">
+
             >
 
             <textarea
