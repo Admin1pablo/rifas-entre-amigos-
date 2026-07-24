@@ -69,7 +69,8 @@ def init_db():
     try:
     conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
 except sqlite3.OperationalError:
-    pass
+        pass
+    existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
     if existing == 0:
         cur = conn.execute("""
             INSERT INTO raffles(name, vehicle, description, price, total_numbers, draw_date, status, created_at)
