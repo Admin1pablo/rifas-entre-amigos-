@@ -38,29 +38,18 @@
     <!-- INFORMACIÓN DE LA RIFA -->
 
     <section class="raffle-hero">
- <div class="vehicle-info-card">
 
-    <div class="vehicle-stats">
+    <span class="hero-label">
+        🎟️ RIFA ACTIVA
+    </span>
 
-        <div class="stat">
-            <span>💰 Precio</span>
-            <strong>${{ "%.2f"|format(raffle.price) }}</strong>
-        </div>
+    <h1>{{ raffle.vehicle }}</h1>
 
-        <div class="stat">
-            <span>📅 Sorteo</span>
-            <strong>{{ raffle.draw_date }}</strong>
-        </div>
+    <p>{{ raffle.description }}</p>
 
-        <div class="stat">
-            <span>🎟 Boletos</span>
-            <strong>{{ raffle.total_numbers }}</strong>
-        </div>
+</section>
 
-    </div>
 
-</div>       
-        
 {% if raffle.image %}
 
 <div class="vehicle-image">
@@ -72,45 +61,70 @@
 </div>
 
 {% endif %}
-        <span class="hero-label">
-            🎟️ RIFA ACTIVA
-        </span>
 
-        <h1>
-            {{ raffle.vehicle }}
-        </h1>
 
-        <p>
-            {{ raffle.description }}
-        </p>
+<div class="vehicle-info-card">
 
-        <div class="raffle-price">
-            ${{ "%.2f"|format(raffle.price) }}
-            <span>MXN POR NÚMERO</span>
+    <div class="vehicle-stats">
+
+        <div class="stat">
+
+            <span>💰 Precio</span>
+
+            <strong>
+
+                ${{ "%.2f"|format(raffle.price) }}
+
+            </strong>
+
         </div>
 
-    </section>
+        <div class="stat">
+
+            <span>📅 Sorteo</span>
+
+            <strong>
+
+                {{ raffle.draw_date }}
+
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <span>🎟️ Boletos</span>
+
+            <strong>
+
+                {{ raffle.total_numbers }}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
 
 
-    <!-- MENSAJES -->
+{% with messages = get_flashed_messages() %}
 
-    {% with messages = get_flashed_messages() %}
+{% if messages %}
 
-        {% if messages %}
+<div class="notice">
 
-            <div class="notice">
+{% for message in messages %}
 
-                {% for message in messages %}
+{{ message }}
 
-                    {{ message }}
+{% endfor %}
 
-                {% endfor %}
+</div>
 
-            </div>
+{% endif %}
 
-        {% endif %}
-
-    {% endwith %}
+{% endwith %}
 
 
     <form
