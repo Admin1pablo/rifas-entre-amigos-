@@ -92,3 +92,32 @@
     object-fit:cover;
     display:block;
 }
+/* ======== BOTONES ======== */
+
+.button{
+
+    background:#d4af37;
+    color:#111;
+    border:none;
+    border-radius:12px;
+    padding:14px 20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+
+}
+
+.button:hover{
+
+    transform:translateY(-2px);
+    background:#e8c14a;
+
+}
+
+.reserve-button{
+
+    width:100%;
+    font-size:18px;
+    padding:18px;
+
+}
