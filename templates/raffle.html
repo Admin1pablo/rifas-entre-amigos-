@@ -147,109 +147,98 @@
 
             <!-- SECCIÓN DE NÚMEROS -->
 
-            <section class="numbers-panel">
+            <div class="raffle-layout">
 
-                <div class="panel-title">
+    <!-- COLUMNA IZQUIERDA -->
 
-                    <div>
+    <section class="left-column">
 
-                        <span>
-                            🎟️ TU OPORTUNIDAD
-                        </span>
+        <div class="lucky-machine">
 
-                        <h2>
-                            ELIGE TUS NÚMEROS
-                        </h2>
+            <div class="machine-icon">
+                🎰
+            </div>
 
-                    </div>
+            <div class="machine-content">
 
-                    <div class="selected-counter">
+                <h2>LA MAQUINITA DEL RANCHO</h2>
 
-                        <strong id="selectedCount">
-                            0
-                        </strong>
+                <p>
+                    ¿No sabes qué números elegir?
+                    Deja que la suerte elija por ti.
+                </p>
 
-                        <small>
-                            seleccionados
-                        </small>
+                <div class="machine-controls">
 
-                    </div>
+                    <input
+                        type="number"
+                        id="cantidadNumeros"
+                        min="1"
+                        max="100"
+                        value="10">
 
-                </div>
+                    <button
+                        type="button"
+                        onclick="elegirNumeros()">
 
+                        🎰 ELEGIR AL AZAR
 
-                <!-- MAQUINITA -->
-
-                <div class="lucky-machine">
-
-                    <div class="machine-icon">
-                        🎰
-                    </div>
-
-                    <div class="machine-content">
-
-                        <h3>
-                            LA MAQUINITA DEL RANCHO
-                        </h3>
-
-                        <p>
-                            ¿No sabes qué números elegir?
-                            Deja que la suerte elija por ti.
-                        </p>
-<aside class="participant-panel">
-                        <div class="machine-controls">
-
-                            <input
-                                type="number"
-                                id="cantidadNumeros"
-                                min="1"
-                                max="100"
-                                value="10"
-                            >
-
-                            <button
-                                type="button"
-                                onclick="elegirNumeros()"
-                            >
-
-                                🎰 ELEGIR AL AZAR
-
-                            </button>
-
-                        </div>
-
-                    </div>
+                    </button>
 
                 </div>
-
 
                 <p
                     id="numerosElegidos"
-                    class="lucky-result"
-                ></p>
+                    class="lucky-result">
+                </p>
+
+            </div>
+
+        </div>
 
 
-                <!-- LEYENDA -->
+        <div class="legend">
 
-                <div class="legend">
+            <span class="available">
+                🟢 Disponible
+            </span>
 
-                    <span class="available">
-                        🟢 Disponible
-                    </span>
+            <span class="selected">
+                🟨 Seleccionado
+            </span>
 
-                    <span class="selected">
-                        🟨 Seleccionado
-                    </span>
+            <span class="reserved">
+                🟤 Apartado
+            </span>
 
-                    <span class="reserved">
-                        🟤 Apartado
-                    </span>
+            <span class="sold">
+                🔴 Vendido
+            </span>
 
-                    <span class="sold">
-                        🔴 Vendido
-                    </span>
+        </div>
 
-                </div>
+    </section>
+
+
+    <!-- COLUMNA DERECHA -->
+
+    <aside class="participant-panel">
+
+        <div class="participant-header">
+
+            <span>
+                📝 PASO FINAL
+            </span>
+
+            <h2>
+                TUS DATOS
+            </h2>
+
+            <p>
+                Completa tus datos para apartar tus números.
+            </p>
+
+        </div>
 
 
                 <!-- NÚMEROS -->
