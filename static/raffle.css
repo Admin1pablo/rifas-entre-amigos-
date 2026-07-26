@@ -608,3 +608,158 @@ min-width:100%;
     font-weight:bold;
 
 }
+/*======================================
+        PANEL DEL PARTICIPANTE
+======================================*/
+
+.participant-panel{
+
+    background:#1b1b1b;
+
+    border:2px solid #4CAF50;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    position:sticky;
+
+    top:20px;
+
+}
+
+.participant-header{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+.participant-header span{
+
+    color:#FFD54F;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
+
+.participant-header h2{
+
+    margin:10px 0;
+
+    font-size:32px;
+
+    color:white;
+
+}
+
+.participant-panel label{
+
+    display:block;
+
+    margin-top:18px;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+    color:#ddd;
+
+}
+
+.participant-panel input,
+
+.participant-panel select{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:2px solid #333;
+
+    background:#2a2a2a;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+.participant-panel input:focus,
+
+.participant-panel select:focus{
+
+    outline:none;
+
+    border-color:#4CAF50;
+
+    box-shadow:0 0 12px rgba(76,175,80,.35);
+
+}
+
+.purchase-summary{
+
+    margin-top:25px;
+
+    background:#242424;
+
+    border-radius:15px;
+
+    padding:20px;
+
+}
+
+.summary-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:12px 0;
+
+    font-size:18px;
+
+}
+
+.reserve-button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    background:#4CAF50;
+
+    color:white;
+
+    border:none;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.30s;
+
+}
+
+.reserve-button:hover{
+
+    background:#66BB6A;
+
+    transform:translateY(-2px);
+
+}
