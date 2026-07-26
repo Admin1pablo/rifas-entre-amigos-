@@ -211,3 +211,128 @@
     font-weight:bold;
 
 }
+/* ===========================
+   FOTO DEL VEHÍCULO
+=========================== */
+
+.vehicle-image{
+    width:100%;
+    max-width:1100px;
+    margin:35px auto;
+    border-radius:30px;
+    overflow:hidden;
+    background:#111;
+    box-shadow:0 18px 45px rgba(0,0,0,.45);
+    border:5px solid #4caf50;
+}
+
+.vehicle-image img{
+    width:100%;
+    display:block;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    transition:.35s;
+}
+
+.vehicle-image:hover img{
+    transform:scale(1.03);
+}
+
+/* ===========================
+   INFORMACIÓN
+=========================== */
+
+.vehicle-info-card{
+
+    max-width:1100px;
+    margin:25px auto;
+
+    background:#1b1b1b;
+
+    border:2px solid #2f8d46;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+}
+
+.vehicle-stats{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.stat{
+
+    flex:1;
+
+    min-width:180px;
+
+    text-align:center;
+
+    padding:15px;
+
+    background:#242424;
+
+    border-radius:15px;
+
+}
+
+.stat span{
+
+    display:block;
+
+    color:#bbb;
+
+    font-size:15px;
+
+}
+
+.stat strong{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:28px;
+
+    color:#FFD54F;
+
+}
+
+/* ===========================
+   CELULAR
+=========================== */
+
+@media(max-width:768px){
+
+.vehicle-image{
+
+margin:15px;
+
+border-radius:18px;
+
+}
+
+.vehicle-info-card{
+
+margin:15px;
+
+}
+
+.stat{
+
+min-width:100%;
+
+}
+
+}
