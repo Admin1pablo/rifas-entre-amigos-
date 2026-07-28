@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS purchases (
         pass
 
     try:
-    conn.execute("ALTER TABLE tickets ADD COLUMN purchase_id INTEGER")
+        conn.execute("ALTER TABLE tickets ADD COLUMN purchase_id INTEGER")
 except sqlite3.OperationalError:
-    pass
+        pass
 
 existing = conn.execute("SELECT COUNT(*) AS c FROM raffles").fetchone()["c"]
 
