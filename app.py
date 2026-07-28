@@ -81,12 +81,12 @@ CREATE TABLE IF NOT EXISTS purchases (
     except sqlite3.OperationalError:
         pass
         
-    try:
+        try:
         conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
     except sqlite3.OperationalError:
         pass
 
-        try:
+    try:
         conn.execute("ALTER TABLE tickets ADD COLUMN purchase_id INTEGER")
     except sqlite3.OperationalError:
         pass
