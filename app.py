@@ -50,7 +50,7 @@ def init_db():
         UNIQUE(raffle_id, number),
         FOREIGN KEY(raffle_id) REFERENCES raffles(id)
     );
-    """)
+    
 CREATE TABLE IF NOT EXISTS purchases (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     raffle_id INTEGER NOT NULL,
@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS purchases (
     approved_at TEXT,
     FOREIGN KEY(raffle_id) REFERENCES raffles(id)
 );
+""")
     try:
         conn.execute("ALTER TABLE tickets ADD COLUMN state TEXT")
     except sqlite3.OperationalError:
