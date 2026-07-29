@@ -222,11 +222,12 @@ def reserve():
     return redirect(url_for("raffle", raffle_id=raffle_id))
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
+
 @app.route("/metodos-pago")
 def payment_methods():
     return render_template("payment_methods.html")
-    
-    return send_from_directory(UPLOAD_FOLDER, filename)
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
 
