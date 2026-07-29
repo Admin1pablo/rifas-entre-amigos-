@@ -97,6 +97,9 @@ def init_db():
         "SELECT COUNT(*) AS c FROM raffles"
     ).fetchone()["c"]
     
+    conn.commit()
+    conn.close()  
+
 @app.route("/")
 def index():
     conn = get_db()
