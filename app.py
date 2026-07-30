@@ -228,6 +228,11 @@ def uploaded_file(filename):
 @app.route("/metodos-pago")
 def payment_methods():
     return render_template("payment_methods.html")
+
+@app.route("/subir-pago")
+def upload_payment():
+    return render_template("upload_payment.html")
+    
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
 
