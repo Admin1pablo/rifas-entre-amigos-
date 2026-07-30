@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<title>Verificar Folio</title>
+<title>Verificar Compra</title>
+
 </head>
 
 <body>
 
-<h1>🔍 Verificar Folio</h1>
+<h1>🔍 Verificar Compra</h1>
 
-<form>
+<form method="POST">
+
+<label>
+
+Teléfono o Folio
+
+</label>
+
+<br><br>
 
 <input
 type="text"
-placeholder="Escribe tu teléfono o folio">
+name="search"
+placeholder="Ej. 8441234567 o F0001"
+required>
 
 <br><br>
 
@@ -25,9 +37,36 @@ Buscar
 
 </form>
 
+{% if tickets %}
+
+<hr>
+
+<h2>Resultado</h2>
+
+{% for t in tickets %}
+
+<div>
+
+<p><strong>Rifa:</strong> {{ t.vehicle }}</p>
+
+<p><strong>Número:</strong> {{ "%04d"|format(t.number) }}</p>
+
+<p><strong>Estado:</strong> {{ t.payment_status }}</p>
+
+<p><strong>Participante:</strong> {{ t.participant_name }}</p>
+
+</div>
+
+<hr>
+
+{% endfor %}
+
+{% endif %}
+
 <br>
 
 <a href="/">⬅ Volver al inicio</a>
 
 </body>
+
 </html>
