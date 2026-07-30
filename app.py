@@ -234,9 +234,35 @@ def upload_payment():
     return render_template("upload_payment.html")
 
 
-@app.route("/verificar-folio")
+@app.route("/verificar-folio", methods=["GET", "POST"])
 def verify_folio():
-    return render_template("verify_folio.html")
+
+    tickets = None
+
+    if request.method == "POST":
+
+        search = request.form.get("search", "").strip()
+
+        conn = get_db()
+
+        tickets = conn.execute("""
+            SELECT
+                t.*,
+                r.vehicle
+            FROM tickets t
+            JOIN raffles r
+                ON r.id = t.raffle_id
+            WHERE
+                t.phone = ?
+                OR t.participant_name = ?
+        """, (search, search)).fetchall()
+
+        conn.close()
+
+    return render_template(
+        "verify_folio.html",
+        tickets=tickets
+    )
 
 
 @app.route("/admin", methods=["GET", "POST"])
