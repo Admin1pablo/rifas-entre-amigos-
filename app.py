@@ -84,14 +84,30 @@ def init_db():
         pass
 
     try:
-        conn.execute("ALTER TABLE tickets ADD COLUMN purchase_id INTEGER")
-    except sqlite3.OperationalError:
-        pass
+    conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
+except sqlite3.OperationalError:
+    pass
 
-    try:
-        conn.execute("ALTER TABLE raffles ADD COLUMN image TEXT")
-    except sqlite3.OperationalError:
-        pass
+try:
+    conn.execute("ALTER TABLE tickets ADD COLUMN purchase_id INTEGER")
+except sqlite3.OperationalError:
+    pass
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS purchases (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    raffle_id INTEGER NOT NULL,
+    folio TEXT UNIQUE,
+    buyer_name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    state TEXT,
+    total_amount REAL NOT NULL DEFAULT 0,
+    payment_proof TEXT,
+    payment_status TEXT NOT NULL DEFAULT 'pending',
+    created_at TEXT NOT NULL,
+    approved_at TEXT
+)
+""")
 
     existing = conn.execute(
         "SELECT COUNT(*) AS c FROM raffles"
