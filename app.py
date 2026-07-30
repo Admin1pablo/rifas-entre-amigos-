@@ -232,7 +232,13 @@ def payment_methods():
 @app.route("/subir-pago")
 def upload_payment():
     return render_template("upload_payment.html")
-    
+
+
+@app.route("/verificar-folio")
+def verify_folio():
+    return render_template("verify_folio.html")
+
+
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
 
