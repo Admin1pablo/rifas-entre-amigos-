@@ -15,10 +15,10 @@
 <header class="home-header">
 
     <div class="payment-link">
-        <a href="#metodos-pago">
-            MÉTODOS<br>
-            DE PAGO
-        </a>
+        <a href="{{ url_for('payment_methods') }}">
+    MÉTODOS<br>
+    DE PAGO
+</a>
     </div>
 
     <div class="home-logo">
@@ -36,10 +36,10 @@
     </div>
 
     <div class="payment-link">
-        <a href="#subir-pago">
-            SUBE TU<br>
-            PAGO AQUÍ
-        </a>
+        <a href="{{ url_for('upload_payment') }}">
+    SUBE TU<br>
+    PAGO AQUÍ
+</a>
     </div>
 
 </header>
